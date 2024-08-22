@@ -1,50 +1,59 @@
 package service;
 
-import java.nio.charset.Charset;
 import java.util.Optional;
 
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
+import dto.UserDTO;
+import dto.UserLoginDTO;
 import model.User;
-import model.UserLogin;
 import repository.UserRepository;
 
+@Service
 public class UserService {
 
-	@Autowired
-	private UserRepository repository;
+    @Autowired
+    private UserRepository repository;
 
-	public User CadastrarUser(User user) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    public UserDTO toDTO(User user) {
+        UserDTO dto = new UserDTO();
+        dto.setId(user.getId());
+        dto.setNome(user.getNome());
+        dto.setUsuario(user.getUsuario());
+        return dto;
+    }
 
-		String senhaEncoder = encoder.encode(user.getSenha());
-		user.setSenha(senhaEncoder);
+    public User toEntity(UserDTO dto) {
+        User user = new User();
+        user.setId(dto.getId());
+        user.setNome(dto.getNome());
+        user.setUsuario(dto.getUsuario());
+        return user;
+    }
 
-		return repository.save(user);
-	}
+    public Optional<UserLoginDTO> logar(Optional<UserLoginDTO> userL) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        Optional<User> usuario = repository.findByUsuario(userL.get().getUsuario());
 
-	public Optional<UserLogin> Logar(Optional<UserLogin> userL) {
+        if (usuario.isPresent()) {
+            if (encoder.matches(userL.get().getSenha(), usuario.get().getSenha())) {
+                return Optional.of(userL.get());
+            }
+        }
+        return Optional.empty();
+    }
 
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		Optional<User> user = repository.findByUser(userL.get().getUser());
+    public User cadastrarUser(UserDTO usuarioDTO) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        User usuario = toEntity(usuarioDTO);
+        usuario.setSenha(encoder.encode(usuario.getSenha()));
+        return repository.save(usuario);
+    }
 
-		if (user.isPresent()) {
-			if (encoder.matches(user.get().getSenha(), user.get().getSenha())) {
-
-				String auth = userL.get().getUser() + ":" + user.get().getSenha();
-				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
-				String authHeader = "Basic " + new String(encodedAuth);
-
-				userL.get().setToken(authHeader);
-				userL.get().setVendedor(user.get().isVendedor());
-				userL.get().setNome(user.get().getNome());
-
-				return userL;
-
-			}
-		}
-		return null;
-	}
+    public User atualizarUser(UserDTO usuarioDTO) {
+        User usuario = toEntity(usuarioDTO);
+        return repository.save(usuario);
+    }
 }
