@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +22,7 @@ import repository.ProductRepository;
 @RequestMapping("/produtos")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductController {
+	
 	@Autowired
 	private ProductRepository repository;
 	
@@ -30,24 +32,26 @@ public class ProductController {
 	}
 	
 	@GetMapping("/porId/{id}")
-	public ResponseEntity<Product> GetById(@PathVariable long id){
+	public ResponseEntity<Product> getById(@PathVariable long id){
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());				
 	}
 	
 	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Product>> GetByNome(@PathVariable String nome){
+	public ResponseEntity<List<Product>> getByNome(@PathVariable String nome){
 		return ResponseEntity.ok(repository.findAllByNomeContainingIgnoreCase(nome));				
 	}
 	
 	@PostMapping
 	public ResponseEntity<Product> Post(@RequestBody Product produto){
-		return ResponseEntity.ok(repository.save(produto));
+	    Product novoProduto = repository.save(produto);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(novoProduto);
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<Product> Put(@RequestBody Product produto){
-		return ResponseEntity.ok(repository.save(produto));
+	    Product produtoAtualizado = repository.save(produto);
+	    return ResponseEntity.status(HttpStatus.OK).body(produtoAtualizado);
 	}
 	
 	@DeleteMapping("/{id}")
