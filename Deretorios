@@ -1,0 +1,87 @@
+ecommerce-project/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── com/
+│   │   │   │   └── yourcompany/
+│   │   │   │       └── ecommerce/
+│   │   │   │           ├── controller/
+│   │   │   │           │   ├── ProductController.java
+│   │   │   │           │   ├── CategoryController.java
+│   │   │   │           │   ├── ShoppingCartController.java
+│   │   │   │           │   ├── CartItemController.java
+│   │   │   │           │   ├── UserController.java
+│   │   │   │           │   ├── OrderController.java
+│   │   │   │           │   ├── PaymentController.java
+│   │   │   │           │   └── AuthController.java
+│   │   │   │           ├── dto/
+│   │   │   │           │   ├── ProductDTO.java
+│   │   │   │           │   ├── CategoryDTO.java
+│   │   │   │           │   ├── CartItemDTO.java
+│   │   │   │           │   ├── ShoppingCartDTO.java
+│   │   │   │           │   ├── UserDTO.java
+│   │   │   │           │   ├── UserLoginDTO.java
+│   │   │   │           │   ├── OrderDTO.java
+│   │   │   │           │   └── PaymentDTO.java
+│   │   │   │           ├── model/
+│   │   │   │           │   ├── Product.java
+│   │   │   │           │   ├── Category.java
+│   │   │   │           │   ├── CartItem.java
+│   │   │   │           │   ├── ShoppingCart.java
+│   │   │   │           │   ├── User.java
+│   │   │   │           │   ├── Order.java
+│   │   │   │           │   └── Payment.java
+│   │   │   │           ├── repository/
+│   │   │   │           │   ├── ProductRepository.java
+│   │   │   │           │   ├── CategoryRepository.java
+│   │   │   │           │   ├── CartItemRepository.java
+│   │   │   │           │   ├── ShoppingCartRepository.java
+│   │   │   │           │   ├── UserRepository.java
+│   │   │   │           │   ├── OrderRepository.java
+│   │   │   │           │   └── PaymentRepository.java
+│   │   │   │           ├── service/
+│   │   │   │           │   ├── ProductService.java
+│   │   │   │           │   ├── CategoryService.java
+│   │   │   │           │   ├── CartItemService.java
+│   │   │   │           │   ├── ShoppingCartService.java
+│   │   │   │           │   ├── UserService.java
+│   │   │   │           │   ├── OrderService.java
+│   │   │   │           │   ├── PaymentService.java
+│   │   │   │           │   ├── PaymentGatewayService.java
+│   │   │   │           │   └── AuthService.java
+│   │   │   │           ├── util/
+│   │   │   │           │   ├── JwtUtil.java
+│   │   │   │           │   ├── SecurityConfig.java
+│   │   │   │           │   ├── DateUtils.java
+│   │   │   │           │   └── EmailUtils.java
+│   │   │   │           └── messaging/
+│   │   │   │               └── RabbitMQConfig.java
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       ├── application-dev.properties
+│   │       ├── application-prod.properties
+│   │       └── static/
+│   │           └── (arquivos estáticos como CSS, JS, imagens, etc.)
+│   └── test/
+│       ├── java/
+│       │   ├── com/
+│       │   │   └── yourcompany/
+│       │   │       └── ecommerce/
+│       │   │           ├── controller/
+│       │   │           ├── service/
+│       │   │           ├── repository/
+│       │   │           └── integration/
+│       └── resources/
+│           └── (recursos para testes)
+│
+├── docs/
+│   └── (documentação adicional sobre o projeto)
+│
+├── scripts/
+│   ├── deploy.sh
+│   └── build.sh
+│
+├── .gitignore
+├── README.md
+└── pom.xml (ou build.gradle se estiver usando Gradle)
