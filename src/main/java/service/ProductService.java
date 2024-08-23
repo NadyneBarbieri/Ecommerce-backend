@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ public class ProductService {
     
     @Autowired
     private CategoryService categoryService;
+    
+   
 
     public ProductDTO toDTO(Product product) {
         ProductDTO dto = new ProductDTO();
@@ -48,4 +52,16 @@ public class ProductService {
 	        Product product = toEntity(productDTO);
 	        return repository.save(product);
 	    }
+
+	    public Product findById(Long productId) {
+	        Optional<Product> product = repository.findById(productId);
+	        if (product.isPresent()) {
+	            return product.get();
+	        } else {
+	            // Aqui você pode lançar uma exceção ou retornar null, dependendo da lógica do seu sistema
+	            throw new RuntimeException("Produto não encontrado com o id: " + productId);
+	        }
+	    }
+
+	
 }
