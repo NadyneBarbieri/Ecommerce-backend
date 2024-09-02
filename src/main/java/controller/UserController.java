@@ -52,11 +52,11 @@ public class UserController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 
-	@PostMapping("/cadastrar")
-	public ResponseEntity<UserDTO> post(@RequestBody UserDTO usuarioDTO) {
-		User newUser = usuarioService.cadastrarUser(usuarioDTO);
-		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.toDTO(newUser));
-	}
+	 @PostMapping("/cadastrar")
+	    public ResponseEntity<UserDTO> post(@RequestBody UserDTO usuarioDTO) {
+	        User newUser = usuarioService.cadastrarUser(usuarioDTO);
+	        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.toDTO(newUser));
+	    }
 
 	@PutMapping
 	public ResponseEntity<UserDTO> put(@RequestBody UserDTO usuarioDTO) {
