@@ -29,6 +29,12 @@ public class CategoryController {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
+
+    public CategoryModel getCategoryById(Long id) {
+        return categoryRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Categoria não encontrada com ID: " + id));
+    }
+
 	// Converter Model para DTO
 	private CategoryDTO convertToDto(CategoryModel categoryModel) {
 	    CategoryDTO dto = new CategoryDTO();
