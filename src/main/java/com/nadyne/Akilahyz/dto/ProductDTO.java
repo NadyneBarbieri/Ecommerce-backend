@@ -2,28 +2,13 @@ package com.nadyne.Akilahyz.dto;
 
 import com.nadyne.Akilahyz.model.CategoryModel;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
-
 public class ProductDTO {
 
 	private Long id;
-
-	@NotBlank(message = "O atributo nome é obrigatório!")
-	@Size(min = 5, max = 100, message = "O atributo nome deve ter no mínimo 5 e no máximo 100 caracteres")
 	private String name;
-
-	@NotBlank(message = "O atributo descrição é obrigatório!")
-	@Size(min = 10, max = 1000, message = "O atributo descrição deve ter no mínimo 10 e no máximo 1000 caracteres")
 	private String description;
-
-	@Positive(message = "O preço deve ser um valor positivo")
 	private Double price;
-
-	private CategoryModel category; // Use Long para o ID
-
-	
+	private CategoryModel category; 
 	private String photo;
 
 	public void setPhoto(String photo) {
@@ -41,7 +26,7 @@ public class ProductDTO {
 		this.price = price;
 		this.photo = photo;
 		this.category = category;
-		
+
 	}
 
 	public Long getId() {
@@ -88,6 +73,4 @@ public class ProductDTO {
 		return photo;
 	}
 
-
-	
 }
