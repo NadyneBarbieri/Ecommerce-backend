@@ -12,6 +12,10 @@ import com.nadyne.Akilahyz.model.ProductModel;
 public interface ProductRepository extends JpaRepository<ProductModel, Long> {
     List<ProductModel> findAllByNameContainingIgnoreCase(String name);
     Optional<ProductModel> findById(Long id);
+    
+    // Novo método para encontrar produtos por categoria
+    List<ProductModel> findByCategoryId(Long categoryId);
 }
+
 
 
