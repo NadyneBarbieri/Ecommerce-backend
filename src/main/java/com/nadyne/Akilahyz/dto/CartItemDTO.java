@@ -1,27 +1,20 @@
-package com.nadyne.Akilahyz.model;
+package com.nadyne.Akilahyz.dto;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.*;
+public class CartItemDTO {
 
-@Entity
-@Table(name = "items")
-public class CartItemModel {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "products")
-    private ProductModel product;
+    private ProductDTO product;  // Objeto ProductDTO
     private int quantity;
     private BigDecimal totalPrice;
 
     // Construtor padrão
-    public CartItemModel() {}
+    public CartItemDTO() {}
 
     // Construtor com parâmetros
-    public CartItemModel(ProductModel product, int quantity, BigDecimal totalPrice) {
+    public CartItemDTO(Long id, ProductDTO product, int quantity, BigDecimal totalPrice) {
+        this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
@@ -36,11 +29,11 @@ public class CartItemModel {
         this.id = id;
     }
 
-    public ProductModel getProduct() {
+    public ProductDTO getProduct() {
         return product;
     }
 
-    public void setProduct(ProductModel product) {
+    public void setProduct(ProductDTO product) {
         this.product = product;
     }
 
@@ -60,3 +53,4 @@ public class CartItemModel {
         this.totalPrice = totalPrice;
     }
 }
+

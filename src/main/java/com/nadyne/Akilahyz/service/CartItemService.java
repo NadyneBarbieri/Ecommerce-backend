@@ -10,12 +10,11 @@ import com.nadyne.Akilahyz.repository.CartItemRepository;
 
 @Service
 public class CartItemService {
-
     @Autowired
     private CartItemRepository cartItemRepository;
-
-    public List<CartItemModel> searchByProductName(String productName) {
-        return cartItemRepository.findAllByProductNameContainingIgnoreCase(productName);
+   //busca produtos por id
+    public List<CartItemModel> findItemsByProduct(Long product) {
+        return cartItemRepository.findAllByProduct_Id(product);
     }
 }
 
