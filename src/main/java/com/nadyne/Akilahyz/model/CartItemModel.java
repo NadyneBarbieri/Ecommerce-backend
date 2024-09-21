@@ -2,7 +2,13 @@ package com.nadyne.Akilahyz.model;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "items")
@@ -11,9 +17,15 @@ public class CartItemModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne // Associa um item de carrinho a um produto
+    @JoinColumn(name = "product") // Nome da coluna no banco de dados
+    private ProductModel product; // Alterado para ProductModel
+    
     @ManyToOne
-    @JoinColumn(name = "products")
-    private ProductModel product;
+    @JoinColumn(name = "cart") // ou o nome da coluna correspondente
+    private CartModel cart;
+
     private int quantity;
     private BigDecimal totalPrice;
 
@@ -22,7 +34,7 @@ public class CartItemModel {
 
     // Construtor com parâmetros
     public CartItemModel(ProductModel product, int quantity, BigDecimal totalPrice) {
-        this.product = product;
+        this.product = product; // Alterado para ProductModel
         this.quantity = quantity;
         this.totalPrice = totalPrice;
     }
@@ -36,11 +48,11 @@ public class CartItemModel {
         this.id = id;
     }
 
-    public ProductModel getProduct() {
+    public ProductModel getProduct() { // Alterado para retornar ProductModel
         return product;
     }
 
-    public void setProduct(ProductModel product) {
+    public void setProduct(ProductModel product) { // Alterado para aceitar ProductModel
         this.product = product;
     }
 
