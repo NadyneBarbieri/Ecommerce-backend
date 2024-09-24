@@ -52,5 +52,12 @@ public class CartItemController {
         List<CartItemDTO> cartItems = cartItemService.listCartItems(cartId);
         return new ResponseEntity<>(cartItems, HttpStatus.OK);
     }
+    
+    @GetMapping("/list/all")
+    public ResponseEntity<List<CartItemDTO>> listAllCartItems() {
+        List<CartItemDTO> allCartItems = cartItemService.listAllCartItems();
+        return new ResponseEntity<>(allCartItems, HttpStatus.OK);
+    }
+
 }
 

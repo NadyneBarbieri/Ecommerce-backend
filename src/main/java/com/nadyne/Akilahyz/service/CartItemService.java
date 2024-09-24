@@ -134,6 +134,13 @@ public class CartItemService {
 	}
 
 
+	public List<CartItemDTO> listAllCartItems() {
+	    List<CartItemModel> allCartItems = cartItemRepository.findAll();
+	    return allCartItems.stream().map(item -> convertToDto(item)).collect(Collectors.toList());
+	}
+
+
+
 
 
 

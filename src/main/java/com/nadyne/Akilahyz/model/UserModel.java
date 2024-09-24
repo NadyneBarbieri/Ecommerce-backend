@@ -1,13 +1,10 @@
 package com.nadyne.Akilahyz.model;
 
-import java.util.Set;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -38,12 +35,6 @@ public class UserModel {
 
 	private String type;
 
-//	@OneToMany(mappedBy = "usuarios", cascade = CascadeType.REMOVE)
-//	@JsonIgnoreProperties("usuarios")
-//	private List<ProductModel> produto;
-	
-	@OneToMany(mappedBy = "user")
-    private Set<ProductModel> produtos;
 
 	public UserModel() {
 	}
